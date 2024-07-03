@@ -23,7 +23,7 @@ public class DatabaseStack extends Construct{
 
         DatabaseInstance dbInstance = new DatabaseInstance(this, "auth-db-api", DatabaseInstanceProps.builder()
                 .vpc(stackProps.getVpc())
-                .databaseName("auth-db")
+                .databaseName("authdb")
                 .allowMajorVersionUpgrade(false)
                 .backupRetention(Duration.days(0))
                 .instanceIdentifier("auth-db-api")
@@ -78,7 +78,7 @@ public class DatabaseStack extends Construct{
                 .securityGroups(securityGroups)
                 .environment(new HashMap<>() {{
                     put("SECRET_NAME", secret.getSecretName());
-                    put("DB_CONNECTION_URL", "jdbc:postgresql://" + database.getDbInstanceEndpointAddress() + ":5432/auth-db");
+                    put("DB_CONNECTION_URL", "jdbc:postgresql://" + database.getDbInstanceEndpointAddress() + ":5432/authdb");
                     put("DB_USER", "postgres");
                 }})
                 .build();
